@@ -30,17 +30,30 @@ class DoublyLinkedList:
     def add_to_front(self, node: Node) -> None:
         """Insert `node` immediately after the head sentinel (the 'most recently used' end). O(1)."""
         # TODO
-        raise NotImplementedError
+        first_node = self.head.next 
+
+        node.prev = self.head 
+        node.next = first_node
+
+        self.head.next = node 
+        first_node.prev = node
+
 
     def remove(self, node: Node) -> None:
         """Unlink `node` from wherever it currently sits. O(1)."""
         # TODO
-        raise NotImplementedError
+        node.prev.next = node.next 
+        node.next.prev = node.prev
+
+        node.prev = None
+        node.next = None 
+
 
     def move_to_front(self, node: Node) -> None:
         """Move an already-linked `node` to the front. O(1) -- should just be remove() + add_to_front()."""
         # TODO
-        raise NotImplementedError
+        self.remove(node)
+        self.add_to_front(node)
 
     def least_recently_used(self) -> Optional[Node]:
         """Given: the node adjacent to the tail sentinel, or None if the list is empty."""
